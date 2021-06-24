@@ -85,19 +85,19 @@ class MedianOfAStream {
   }
 
   insert_num(num) {
+
     if (this.maxHeap.peek() === null || num < this.maxHeap.peek()) {
       this.maxHeap.add(num);
     } else {
       this.minHeap.add(num);
     }
+    
     const minHeapSize = this.minHeap.size(),  maxHeapSize = this.maxHeap.size();
     if (maxHeapSize - minHeapSize > 1) {
       this.minHeap.add(this.maxHeap.poll());
     } else if (minHeapSize - maxHeapSize > 1) {
       this.maxHeap.add(this.minHeap.poll());
     }
-
-    return -1;
   }
 
   find_median(self) {
@@ -115,9 +115,9 @@ class MedianOfAStream {
 
 var medianOfAStream = new MedianOfAStream();
 medianOfAStream.insert_num(3);
-medianOfAStream.insert_num(1);
+medianOfAStream.insert_num(1); // [1, 3]
 console.log(`The median is: ${medianOfAStream.find_median()}`);
-medianOfAStream.insert_num(5);
+medianOfAStream.insert_num(5); // [1,3, 5]
 console.log(`The median is: ${medianOfAStream.find_median()}`);
-medianOfAStream.insert_num(4);
+medianOfAStream.insert_num(4); // [1, 3, 4, 5]
 console.log(`The median is: ${medianOfAStream.find_median()}`);
